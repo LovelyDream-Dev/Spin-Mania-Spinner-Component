@@ -1,10 +1,10 @@
 extends Node2D
 class_name Player_Spinner
 
-@onready var subRoot = $SubRoot
-@onready var anchor = $Parent/Anchor
-@onready var body = $Parent/Anchor/Body
-@onready var hitNodes:HBoxContainer = $SubRoot/Anchor/HitNodesino
+@onready var subRoot:Node2D = $SubRoot 
+@onready var anchor:Node2D = $SubRoot/Anchor
+@onready var body:Node2D = $SubRoot/Anchor/Body
+@onready var hitNodes:HBoxContainer = $SubRoot/Anchor/HitNodes
 @onready var hitNodeLeft:TextureRect = $SubRoot/Anchor/HitNodes/HitNodeLeft
 @onready var hitNodeRight:TextureRect = $SubRoot/Anchor/HitNodes/HitNodeRight
 @onready var outerRing:Node2D = $SubRoot/OuterRing
@@ -17,19 +17,22 @@ class_name Player_Spinner
 
 var secondsPerBeat:float
 var beatsPerSecond:float
-var rotationRadiansPerSecond:float
+var rotationRadiansPerBeat:float
+var rotationsPerBeat:float = 0.25
 
 func _enter_tree() -> void:
 	pass
 
 func _ready() -> void:
-	pass
+	secondsPerBeat = 60/bpm
+	beatsPerSecond = bpm/60
+	rotationRadiansPerBeat = TAU * rotationsPerBeat
 
 func _input(_event: InputEvent) -> void:
 	pass
 
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	anchor.rotation += rotationRadiansPerBeat  * (delta / secondsPerBeat)
 
 func _exit_tree() -> void:
 	pass
@@ -38,4 +41,3 @@ func _exit_tree() -> void:
 func on_bpm_changed(value):
 	secondsPerBeat = 60/value
 	beatsPerSecond = value/60
-	rotationRadiansPerSecond = TAU/secondsPerBeat
