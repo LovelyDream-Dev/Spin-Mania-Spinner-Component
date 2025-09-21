@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://7mgaervmad11"]
+
+[ext_resource type="Texture2D" uid="uid://rhndi8ag5i5b" path="res://Spinner Component/Default Images/Body-Fill-Left.png" id="1_tgduj"]
+[ext_resource type="Script" uid="uid://7pgnfdkadf0k" path="res://Spinner Component/Scenes/Spinner/spinner.gd" id="1_wlxnq"]
+[ext_resource type="Texture2D" uid="uid://cy2v22ajdkunm" path="res://Spinner Component/Default Images/Body-Fill-Right.png" id="2_2i3hg"]
+[ext_resource type="Texture2D" uid="uid://3f7lycs11idh" path="res://Spinner Component/Default Images/Spinner-Body.png" id="3_oohy3"]
+[ext_resource type="Texture2D" uid="uid://c308yj1sdyeok" path="res://Spinner Component/Default Images/Hit-Node-Left.png" id="4_jckkb"]
+[ext_resource type="Texture2D" uid="uid://dhmkoqdydwlvg" path="res://Spinner Component/Default Images/Hit-Node-Right.png" id="5_cg6s7"]
+[ext_resource type="Texture2D" uid="uid://r8d8a0462b4t" path="res://Spinner Component/Default Images/Hit-Ring-Area-Outline.png" id="6_2i3hg"]
+[ext_resource type="Texture2D" uid="uid://sfscdi1uubbd" path="res://Spinner Component/Default Images/Hit-Ring-Area-Body.png" id="7_oohy3"]
+[ext_resource type="Texture2D" uid="uid://ctbkhxnr48m0x" path="res://Spinner Component/Default Images/Detail-Line.png" id="8_cg6s7"]
+[ext_resource type="Texture2D" uid="uid://b2erbxo8ogs38" path="res://Spinner Component/Default Images/Hit-Ring.png" id="8_jckkb"]
+
+[node name="Spinner" type="Node2D"]
+script = ExtResource("1_wlxnq")
+
+[node name="SubRoot" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="OuterRing" type="Node2D" parent="SubRoot"]
+
+[node name="OuterRingAreaBody" type="Sprite2D" parent="SubRoot/OuterRing"]
+texture = ExtResource("7_oohy3")
+
+[node name="OuterRingAreaOutline" type="Sprite2D" parent="SubRoot/OuterRing"]
+texture = ExtResource("6_2i3hg")
+
+[node name="DetailLine" type="Sprite2D" parent="SubRoot/OuterRing"]
+position = Vector2(-450, 0)
+texture = ExtResource("8_cg6s7")
+
+[node name="DetailLine2" type="Sprite2D" parent="SubRoot/OuterRing"]
+position = Vector2(0, -450)
+rotation = 1.5707964
+texture = ExtResource("8_cg6s7")
+
+[node name="DetailLine3" type="Sprite2D" parent="SubRoot/OuterRing"]
+position = Vector2(2.026558e-06, 450)
+rotation = 1.5707964
+texture = ExtResource("8_cg6s7")
+
+[node name="DetailLine4" type="Sprite2D" parent="SubRoot/OuterRing"]
+position = Vector2(450, 0)
+texture = ExtResource("8_cg6s7")
+
+[node name="HitRing" type="Node2D" parent="SubRoot"]
+
+[node name="HitRingSprite" type="Sprite2D" parent="SubRoot/HitRing"]
+texture = ExtResource("8_jckkb")
+
+[node name="Anchor" type="Node2D" parent="SubRoot"]
+
+[node name="Body" type="Node2D" parent="SubRoot/Anchor"]
+
+[node name="BodyFillLeft" type="Sprite2D" parent="SubRoot/Anchor/Body"]
+position = Vector2(-230, 0)
+texture = ExtResource("1_tgduj")
+
+[node name="BodyFillRight" type="Sprite2D" parent="SubRoot/Anchor/Body"]
+position = Vector2(230, 0)
+rotation = -3.1415925
+texture = ExtResource("2_2i3hg")
+
+[node name="BodySprite" type="Sprite2D" parent="SubRoot/Anchor/Body"]
+texture = ExtResource("3_oohy3")
+
+[node name="HitNodes" type="HBoxContainer" parent="SubRoot/Anchor"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -49.0
+offset_right = 87.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="HitNodeLeft" type="TextureRect" parent="SubRoot/Anchor/HitNodes"]
+layout_mode = 2
+texture = ExtResource("4_jckkb")
+
+[node name="HitNodeRight" type="TextureRect" parent="SubRoot/Anchor/HitNodes"]
+layout_mode = 2
+texture = ExtResource("5_cg6s7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
