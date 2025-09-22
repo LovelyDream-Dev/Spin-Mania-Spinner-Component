@@ -51,8 +51,8 @@ func _input(_event: InputEvent) -> void:
 	body_animations()
 
 func _process(delta: float) -> void:
-	anchor.rotation += rotationRadiansPerBeat  * (delta / secondsPerBeat)
-	pass
+	rotate_spinner(delta)
+	rotate_hit_rings(delta)
 
 func _exit_tree() -> void:
 	pass
@@ -61,6 +61,14 @@ func _exit_tree() -> void:
 func on_bpm_changed(value):
 	secondsPerBeat = 60/value
 	beatsPerSecond = value/60
+
+func rotate_spinner(delta:float):
+	anchor.rotation += rotationRadiansPerBeat  * (delta / secondsPerBeat)
+
+func rotate_hit_rings(delta:float):
+	outerRing.rotation += (rotationRadiansPerBeat/4)  * (delta / secondsPerBeat)
+	hitRing.rotation += (rotationRadiansPerBeat/8)  * (delta / secondsPerBeat)
+	
 
 # Init tween variables for hit node animations
 var twLeftNode:Tween
