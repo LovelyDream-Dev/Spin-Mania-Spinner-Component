@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0tpd5yx7pcyj"]
+
+[ext_resource type="Script" uid="uid://bql8a37kuptyd" path="res://Spinner Component/Scenes/Lazer/lazer.gd" id="1_rkak6"]
+[ext_resource type="Shader" uid="uid://ckqoyjc8vvbsn" path="res://Spinner Component/Scenes/Lazer/dashedline.gdshader" id="2_a171c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yxhv"]
+shader = ExtResource("2_a171c")
+shader_parameter/dashLength = 0.1
+shader_parameter/gapLength = 0.05
+shader_parameter/lineColor = Color(1, 1, 1, 1)
+
+[node name="Lazer" type="Node2D"]
+script = ExtResource("1_rkak6")
+
+[node name="Dashes" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6yxhv")
+offset_right = 500.0
+offset_bottom = 10.0
