@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7mgaervmad11"]
+[gd_scene load_steps=16 format=3 uid="uid://7mgaervmad11"]
 
 [ext_resource type="Texture2D" uid="uid://rhndi8ag5i5b" path="res://Spinner Component/Default Images/Body-Fill-Left.png" id="1_tgduj"]
 [ext_resource type="Script" uid="uid://7pgnfdkadf0k" path="res://Spinner Component/Scenes/Spinner/spinner.gd" id="1_wlxnq"]
@@ -10,12 +10,45 @@
 [ext_resource type="Texture2D" uid="uid://sfscdi1uubbd" path="res://Spinner Component/Default Images/Hit-Ring-Area-Body.png" id="7_oohy3"]
 [ext_resource type="Texture2D" uid="uid://ctbkhxnr48m0x" path="res://Spinner Component/Default Images/Detail-Line.png" id="8_cg6s7"]
 [ext_resource type="Texture2D" uid="uid://b2erbxo8ogs38" path="res://Spinner Component/Default Images/Hit-Ring.png" id="8_jckkb"]
+[ext_resource type="Texture2D" uid="uid://bkl50tp08xlaw" path="res://Spinner Component/Default Images/Node-Divider.png" id="11_lxa6x"]
+
+[sub_resource type="Shader" id="Shader_lxa6x"]
+code = "shader_type canvas_item;
+
+uniform float brightness : hint_range(0.0, 2.0) = 1.0;
+
+void fragment() {
+	vec4 textureColor = texture(TEXTURE, UV);
+	COLOR = textureColor * vec4(vec3(brightness), 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2pbpi"]
+shader = SubResource("Shader_lxa6x")
+shader_parameter/brightness = 0.0
+
+[sub_resource type="Shader" id="Shader_c56w7"]
+code = "shader_type canvas_item;
+
+uniform float brightness : hint_range(0.0, 2.0) = 1.0;
+
+void fragment() {
+	vec4 textureColor = texture(TEXTURE, UV);
+	COLOR = textureColor * vec4(vec3(brightness), 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mq1n8"]
+shader = SubResource("Shader_c56w7")
+shader_parameter/brightness = 1.0
 
 [node name="Spinner" type="Node2D"]
 script = ExtResource("1_wlxnq")
+KEY1_INPUT_NAME = "KEY1"
+KEY2_INPUT_NAME = "KEY2"
 
 [node name="SubRoot" type="Node2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.7, 0.7)
 
 [node name="OuterRing" type="Node2D" parent="SubRoot"]
 
@@ -53,10 +86,12 @@ texture = ExtResource("8_jckkb")
 [node name="Body" type="Node2D" parent="SubRoot/Anchor"]
 
 [node name="BodyFillLeft" type="Sprite2D" parent="SubRoot/Anchor/Body"]
+material = SubResource("ShaderMaterial_2pbpi")
 position = Vector2(-230, 0)
 texture = ExtResource("1_tgduj")
 
 [node name="BodyFillRight" type="Sprite2D" parent="SubRoot/Anchor/Body"]
+material = SubResource("ShaderMaterial_mq1n8")
 position = Vector2(230, 0)
 rotation = -3.1415925
 texture = ExtResource("2_2i3hg")
@@ -64,26 +99,17 @@ texture = ExtResource("2_2i3hg")
 [node name="BodySprite" type="Sprite2D" parent="SubRoot/Anchor/Body"]
 texture = ExtResource("3_oohy3")
 
-[node name="HitNodes" type="HBoxContainer" parent="SubRoot/Anchor"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -87.0
-offset_top = -49.0
-offset_right = 87.0
-offset_bottom = 49.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
+[node name="HitNodes" type="Node2D" parent="SubRoot/Anchor"]
 
-[node name="HitNodeLeft" type="TextureRect" parent="SubRoot/Anchor/HitNodes"]
-layout_mode = 2
+[node name="HitNodeLeft" type="Sprite2D" parent="SubRoot/Anchor/HitNodes"]
+position = Vector2(-52, 0)
 texture = ExtResource("4_jckkb")
 
-[node name="HitNodeRight" type="TextureRect" parent="SubRoot/Anchor/HitNodes"]
-layout_mode = 2
+[node name="HitNodeRight" type="Sprite2D" parent="SubRoot/Anchor/HitNodes"]
+position = Vector2(54, 0)
 texture = ExtResource("5_cg6s7")
+
+[node name="NodeDivider" type="Sprite2D" parent="SubRoot/Anchor/HitNodes"]
+texture = ExtResource("11_lxa6x")
 
 [node name="Camera2D" type="Camera2D" parent="."]
