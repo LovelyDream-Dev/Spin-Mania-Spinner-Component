@@ -18,6 +18,10 @@ class_name Player_Spinner
 @onready var lazerLeft:Visual_Lazer = $SubRoot/Anchor/Lazers/LazerLeft
 @onready var lazerRight:Visual_Lazer = $SubRoot/Anchor/Lazers/LazerRight
 
+# --- SPARKS ---
+@onready var sparkLeft:GPUParticles2D = $SubRoot/Anchor/Lazers/SparkLeft
+@onready var sparkRight:GPUParticles2D = $SubRoot/Anchor/Lazers/SparkRight
+
 # --- HITRING ---
 @onready var outerRing:Node2D = $SubRoot/OuterRing
 @onready var hitRing:Node2D = $SubRoot/HitRing
@@ -77,12 +81,16 @@ func rotate_hit_rings(delta:float):
 func animate_lazers():
 	if Input.is_action_pressed(KEY1_INPUT_NAME):
 		lazerLeft.activate_beam(true)
+		sparkLeft.emitting = true
 	if Input.is_action_just_released(KEY1_INPUT_NAME):
 		lazerLeft.activate_beam(false)
+		sparkLeft.emitting = false
 	if Input.is_action_pressed(KEY2_INPUT_NAME):
 		lazerRight.activate_beam(true)
+		sparkRight.emitting = true
 	if Input.is_action_just_released(KEY2_INPUT_NAME):
 		lazerRight.activate_beam(false)
+		sparkRight.emitting = false
 
 # Init tween variables for hit node animations
 var twLeftNode:Tween

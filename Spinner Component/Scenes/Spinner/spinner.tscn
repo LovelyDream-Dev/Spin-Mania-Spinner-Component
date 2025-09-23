@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://7mgaervmad11"]
+[gd_scene load_steps=20 format=3 uid="uid://7mgaervmad11"]
 
 [ext_resource type="Texture2D" uid="uid://rhndi8ag5i5b" path="res://Spinner Component/Default Images/Body-Fill-Left.png" id="1_tgduj"]
 [ext_resource type="Script" uid="uid://7pgnfdkadf0k" path="res://Spinner Component/Scenes/Spinner/spinner.gd" id="1_wlxnq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bkl50tp08xlaw" path="res://Spinner Component/Default Images/Node-Divider.png" id="11_lxa6x"]
 [ext_resource type="PackedScene" uid="uid://d0tpd5yx7pcyj" path="res://Spinner Component/Scenes/Lazer/lazer.tscn" id="12_c56w7"]
 [ext_resource type="Shader" uid="uid://ckqoyjc8vvbsn" path="res://Spinner Component/Scenes/Lazer/dashedline.gdshader" id="13_2pbpi"]
+[ext_resource type="PackedScene" uid="uid://jqt7if5lbnrm" path="res://Spinner Component/Scenes/Spark Particles/spark_particles.tscn" id="14_mq1n8"]
 
 [sub_resource type="Shader" id="Shader_lxa6x"]
 code = "shader_type canvas_item;
@@ -56,14 +57,15 @@ shader_parameter/opacity = 0.5
 
 [node name="Spinner" type="Node2D"]
 script = ExtResource("1_wlxnq")
+bpm = 128.0
 KEY1_INPUT_NAME = "KEY1"
 KEY2_INPUT_NAME = "KEY2"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -1108.0
-offset_top = -573.0
-offset_right = 1126.0
-offset_bottom = 730.0
+offset_left = -1325.0
+offset_top = -552.0
+offset_right = 909.0
+offset_bottom = 751.0
 color = Color(0, 0, 0, 1)
 
 [node name="SubRoot" type="Node2D" parent="."]
@@ -163,6 +165,16 @@ width = 5.0
 
 [node name="Beam" parent="SubRoot/Anchor/Lazers/LazerRight" index="1"]
 default_color = Color(0.90588236, 0.27058825, 0.41960785, 1)
+
+[node name="SparkLeft" parent="SubRoot/Anchor/Lazers" instance=ExtResource("14_mq1n8")]
+position = Vector2(-450, 0)
+scale = Vector2(0.5, 0.5)
+emitting = false
+
+[node name="SparkRight" parent="SubRoot/Anchor/Lazers" instance=ExtResource("14_mq1n8")]
+position = Vector2(450, 0)
+scale = Vector2(0.5, 0.5)
+emitting = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
