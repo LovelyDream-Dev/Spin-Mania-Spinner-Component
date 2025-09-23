@@ -14,6 +14,10 @@ class_name Player_Spinner
 @onready var hitNodeLeft:Sprite2D = $SubRoot/Anchor/HitNodes/HitNodeLeft
 @onready var hitNodeRight:Sprite2D = $SubRoot/Anchor/HitNodes/HitNodeRight
 
+# --- LAZERS ---
+@onready var lazerLeft:Visual_Lazer = $SubRoot/Anchor/Lazers/LazerLeft
+@onready var lazerRight:Visual_Lazer = $SubRoot/Anchor/Lazers/LazerRight
+
 # --- HITRING ---
 @onready var outerRing:Node2D = $SubRoot/OuterRing
 @onready var hitRing:Node2D = $SubRoot/HitRing
@@ -49,6 +53,7 @@ func _ready() -> void:
 func _input(_event: InputEvent) -> void:
 	hit_node_animations()
 	body_animations()
+	animate_lazers()
 
 func _process(delta: float) -> void:
 	rotate_spinner(delta)
@@ -68,7 +73,16 @@ func rotate_spinner(delta:float):
 func rotate_hit_rings(delta:float):
 	outerRing.rotation += (rotationRadiansPerBeat/4)  * (delta / secondsPerBeat)
 	hitRing.rotation += (rotationRadiansPerBeat/8)  * (delta / secondsPerBeat)
-	
+
+func animate_lazers():
+	if Input.is_action_pressed(KEY1_INPUT_NAME):
+		lazerLeft.activate_beam(true)
+	if Input.is_action_just_released(KEY1_INPUT_NAME):
+		lazerLeft.activate_beam(false)
+	if Input.is_action_pressed(KEY2_INPUT_NAME):
+		lazerRight.activate_beam(true)
+	if Input.is_action_just_released(KEY2_INPUT_NAME):
+		lazerRight.activate_beam(false)
 
 # Init tween variables for hit node animations
 var twLeftNode:Tween
