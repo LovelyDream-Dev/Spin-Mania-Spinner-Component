@@ -81,15 +81,21 @@ func rotate_hit_rings(delta:float):
 func animate_lazers():
 	if Input.is_action_pressed(KEY1_INPUT_NAME):
 		lazerLeft.activate_beam(true)
-		sparkLeft.emitting = true
 	if Input.is_action_just_released(KEY1_INPUT_NAME):
 		lazerLeft.activate_beam(false)
-		sparkLeft.emitting = false
 	if Input.is_action_pressed(KEY2_INPUT_NAME):
 		lazerRight.activate_beam(true)
-		sparkRight.emitting = true
 	if Input.is_action_just_released(KEY2_INPUT_NAME):
 		lazerRight.activate_beam(false)
+
+func sparks():
+	if Input.is_action_pressed(KEY1_INPUT_NAME):
+		sparkLeft.emitting = true
+	if Input.is_action_just_released(KEY1_INPUT_NAME):
+		sparkLeft.emitting = false
+	if Input.is_action_pressed(KEY2_INPUT_NAME):
+		sparkRight.emitting = true
+	if Input.is_action_just_released(KEY2_INPUT_NAME):
 		sparkRight.emitting = false
 
 # Init tween variables for hit node animations
